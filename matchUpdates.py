@@ -77,7 +77,7 @@ def getTeams(driver, j):
     gapLeft = 15
     lastTeams = 222
 
-    teams = Image.new("RGB", (640,2004))
+    teams = Image.new("RGB", (640,2024))
 
     for i in range(4): # Take screenshots and save
         driver.execute_script("window.scrollTo(0,scrollY + 600)")
@@ -116,6 +116,8 @@ while(True): # Update scores
     j+=1
     driver = webdriver.Chrome(chrome_path)
     driver.delete_all_cookies()
+    driver.get('chrome://settings/clearBrowserData')
+    driver.find_element_by_xpath('//settings-ui').send_keys(Keys.ENTER)
     
     getScores(driver, j)
     getTeams(driver, j)
