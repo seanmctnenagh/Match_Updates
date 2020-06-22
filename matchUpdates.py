@@ -125,6 +125,13 @@ while(True): # Update scores
 
     driver.find_element_by_id("user_login").send_keys("user") # Input username
     driver.find_element_by_id("user_pass").send_keys("password"+Keys.ENTER) # Input password
+    
+    driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/a").click() # Click add new
+
+    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\scores.png") # Give new image path
+    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\teams.png") # Give new image path
+    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\prog.png") # Give new image path
+    time.sleep(20)
 
     print("Don't")
     driver.find_element_by_id("media-search-input").send_keys("scores.png") # Search for scores image
@@ -156,13 +163,6 @@ while(True): # Update scores
         driver.switch_to.alert.accept() # Confirm delete
     except:
         pass
-
-
-    driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/a").click() # Click add new
-
-    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\scores.png") # Give new image path
-    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\teams.png") # Give new image path
-    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\prog.png") # Give new image path
-    time.sleep(20)
+    
     print("Clear")
     driver.quit() # Quit tabs
