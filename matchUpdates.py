@@ -5,6 +5,9 @@ from PIL import Image
 from io import BytesIO
 import time
 
+user = input("Username: ")
+password = input("Password: ")
+
 ################################################################################################################
 def getProg(driver):
     driver.get('http://www.nenagheireog.club/progression.html#'+str(j)) # Open prog
@@ -16,7 +19,7 @@ def getProg(driver):
 
     im = im.crop((15,15,600,375))
 
-    im.save("prog.png")
+    im.save("progression.png")
 
 ################################################################################################################
 
@@ -123,21 +126,21 @@ while(True): # Update scores
     driver.get("http://www.nenagheireog.com/wp-admin/upload.php")
     time.sleep(1)
 
-    driver.find_element_by_id("user_login").send_keys("user") # Input username
-    driver.find_element_by_id("user_pass").send_keys("password"+Keys.ENTER) # Input password
+    driver.find_element_by_id("user_login").send_keys(user) # Input username
+    driver.find_element_by_id("user_pass").send_keys(password+Keys.ENTER) # Input password
     
     driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/a").click() # Click add new
 
-    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\scores.png") # Give new image path
-    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\teams.png") # Give new image path
-    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\Match_Updates\Match_Updates\prog.png") # Give new image path
+    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\MatchUpdates\Match_Updates\scores.png") # Give new image path
+    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\MatchUpdates\Match_Updates\teams.png") # Give new image path
+    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\MatchUpdates\Match_Updates\progression.png") # Give new image path
     time.sleep(20)
 
     print("Don't")
-    driver.find_element_by_id("media-search-input").send_keys("scores.png") # Search for scores image
+    driver.find_element_by_id("media-search-input").send_keys("scores .png") # Search for scores image
     time.sleep(4)
     try:
-        driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li").click() # Click Image
+        driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li[2]").click() # Click Image
         driver.find_element_by_xpath("/html/body/div[8]/div[1]/div/div/div[3]/div/div[2]/div[4]/button").click() # Delete Image
         driver.switch_to.alert.accept() # Confirm delete
     except:
@@ -145,20 +148,20 @@ while(True): # Update scores
 
 
     driver.find_element_by_id("media-search-input").send_keys(Keys.CONTROL+"a") # Search for teams image        
-    driver.find_element_by_id("media-search-input").send_keys("teams.png") # Search for teams image
+    driver.find_element_by_id("media-search-input").send_keys("teams .png") # Search for teams image
     time.sleep(4)
     try:
-        driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li").click() # Click Image
+        driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li[2]").click() # Click Image
         driver.find_element_by_xpath("/html/body/div[8]/div[1]/div/div/div[3]/div/div[2]/div[4]/button").click() # Delete Image
         driver.switch_to.alert.accept() # Confirm delete
     except:
         pass
 
     driver.find_element_by_id("media-search-input").send_keys(Keys.CONTROL+"a") # Search for teams image        
-    driver.find_element_by_id("media-search-input").send_keys("prog.png") # Search for teams image
+    driver.find_element_by_id("media-search-input").send_keys("progression .png") # Search for teams image
     time.sleep(4)
     try:
-        driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li").click() # Click Image
+        driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li[2]").click() # Click Image
         driver.find_element_by_xpath("/html/body/div[8]/div[1]/div/div/div[3]/div/div[2]/div[4]/button").click() # Delete Image
         driver.switch_to.alert.accept() # Confirm delete
     except:
