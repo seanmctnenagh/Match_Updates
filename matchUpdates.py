@@ -4,12 +4,61 @@ from selenium import webdriver
 from PIL import Image
 from io import BytesIO
 import time
-
-user = input("Username: ")
-password = input("Password: ")
+import numpy
 
 ################################################################################################################
-def getProg(driver):
+
+def yellowCrop(image):
+    image = numpy.array(image)
+
+    colours = [list(row[20]) for row in image]
+
+
+    for i, colour in enumerate(colours):
+        if colour == [255,253,66,255]:
+            height = i
+            break
+    return height
+
+################################################################################################################
+def getScorers(driver, j):
+    driver.get('http://www.nenagheireog.club/scorers.html#'+str(j)) # Open scorers
+    driver.maximize_window()
+    time.sleep(0.5)
+    png = driver.get_screenshot_as_png()
+
+    im = Image.open(BytesIO(png))
+
+    im.save("scorersN.png")
+
+    driver.execute_script("window.scrollTo(0,scrollY + 2000)") # Scroll to bottom
+
+    png = driver.get_screenshot_as_png()
+
+    im = Image.open(BytesIO(png))
+    im.save("scorersO.png")
+
+    nenagh = Image.open("scorersN.png")
+    heightN = yellowCrop(nenagh)
+
+    nenagh = nenagh.crop((10,11,471,heightN))
+    nenagh.save("NenaghCrop.png")
+
+    opp = Image.open("scorersO.png")
+    heightO = yellowCrop(opp)
+
+    opp = opp.crop((10,11,471,heightO))
+    opp.save("OppCrop.png")
+
+    scorers = Image.new('RGB',(462,heightN+heightO-20))
+
+    scorers.paste(nenagh)
+    scorers.paste(opp,(0,heightN-10))
+
+    scorers.save("scorers.png")
+
+################################################################################################################
+def getProg(driver, j):
     driver.get('http://www.nenagheireog.club/progression.html#'+str(j)) # Open prog
     driver.maximize_window()
     time.sleep(0.5)
@@ -110,6 +159,9 @@ def getTeams(driver, j):
 
 ###########################################################################################################
 
+user = input("Username: ")
+password = input("Password: ")
+
 chrome_path = r"C:\Users\seanm\Desktop\chromedriver_win32\chromedriver.exe"
 j=0
 while(True): # Update scores
@@ -121,7 +173,8 @@ while(True): # Update scores
     
     getScores(driver, j)
     getTeams(driver, j)
-    getProg(driver)
+    getProg(driver, j)
+    getScorers(driver, j)
 
     # driver.find_element_by_id("link").click() # Open uploads page
 
