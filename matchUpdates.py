@@ -189,6 +189,7 @@ while(True): # Update scores
     driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\MatchUpdates\Match_Updates\scores.png") # Give new image path
     driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\MatchUpdates\Match_Updates\teams.png") # Give new image path
     driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\MatchUpdates\Match_Updates\progression.png") # Give new image path
+    driver.find_element_by_xpath("/html/body/div[7]/input").send_keys(r"C:\Users\seanm\Documents\MatchUpdates\Match_Updates\scorers.png") # Give new image path
     time.sleep(20)
 
     print("Don't")
@@ -214,6 +215,16 @@ while(True): # Update scores
 
     driver.find_element_by_id("media-search-input").send_keys(Keys.CONTROL+"a") # Search for teams image        
     driver.find_element_by_id("media-search-input").send_keys("progression .png") # Search for teams image
+    time.sleep(4)
+    try:
+        driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li[2]").click() # Click Image
+        driver.find_element_by_xpath("/html/body/div[8]/div[1]/div/div/div[3]/div/div[2]/div[4]/button").click() # Delete Image
+        driver.switch_to.alert.accept() # Confirm delete
+    except:
+        pass
+
+    driver.find_element_by_id("media-search-input").send_keys(Keys.CONTROL+"a") # Search for scorers image        
+    driver.find_element_by_id("media-search-input").send_keys("scorers .png") # Search for scorers image
     time.sleep(4)
     try:
         driver.find_element_by_xpath("/html/body/div[3]/div[2]/div[2]/div[1]/div[4]/div[2]/div[3]/div[2]/div/ul/li[2]").click() # Click Image
