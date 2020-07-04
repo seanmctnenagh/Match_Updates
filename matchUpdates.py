@@ -235,3 +235,4 @@ while(True): # Update scores
     
     print("Clear")
     driver.quit() # Quit tabs
+    time.sleep(20)
